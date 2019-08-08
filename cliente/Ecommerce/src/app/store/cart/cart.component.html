@@ -1,0 +1,46 @@
+<app-nav></app-nav> 
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <tr> 
+            <th scope="col">PRECIO</th>
+            <th scope="col">NOMBRE DEL PRODUCTO</th>
+            <th scope="col">CANTIDAD</th>
+            <th scope="col">SUB-TOTAL</th>
+            <th scope="col">ELIMINAR</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let line of cart.lines">
+          <tr>
+            <td>{{line.product.MSRP}}</td> 
+            <td>{{line.product.productName}}</td>
+            <td>
+              <input type="number" [value]="line.quantity" (change)="cart.update(line.product, $event.target.value)">
+            </td>
+            <td>  
+              {{line.lineTotal}} 
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger" (click)="cart.delete(productCode)">
+              X
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>TOTAL</th>
+            <th>----------------</th>
+            <th>----------------</th>
+            <th>----------------></th>
+            <th>{{cart.cartPrice | currency}}</th>
+          </tr>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
+
+  <app-footer></app-footer>
